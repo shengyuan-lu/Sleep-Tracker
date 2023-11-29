@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Sleep Tracker</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment [(ngModel)]="selectedSegment" value="log-data-page-seg-control" class="ion-padding">
+    <ion-segment-button value="view-overnight-sleep-data">
+      <ion-label>Overnight Sleep</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="view-day-sleep-data">
+      <ion-label>Day Sleepiness</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Content for Log Overnight Sleep -->
+  <app-view-overnight-sleep-data *ngIf="selectedSegment === 'view-overnight-sleep-data'"></app-view-overnight-sleep-data>
+
+  <!-- Content for Log Day Sleep -->
+  <app-view-day-sleep-data *ngIf="selectedSegment === 'view-day-sleep-data'"></app-view-day-sleep-data>
+</ion-content>

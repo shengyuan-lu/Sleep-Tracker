@@ -1,0 +1,32 @@
+<ion-item *ngIf="successMessage" class="ion-padding-vertical" color="success" lines="none" (click)="clearMessages()">
+  <b>{{ successMessage }}</b>
+</ion-item>
+
+<!-- Sleepiness Item -->
+<ion-item-group class="ion-padding-bottom">
+  <ion-item lines="none" class="ion-padding-bottom">
+    <ion-label color="primary"><b>Log Sleepiness At </b></ion-label>
+    <ion-label slot="end"><b>{{ getCurrentDateTimeString() }}</b></ion-label>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label color="primary"><b>Select Sleepiness Level</b></ion-label>
+  </ion-item>
+
+  <ion-item lines="none" class="ion-padding-bottom">
+    <ion-range (ionChange)="onIonChange($event)" [ticks]="true" [snaps]="true" [pin]="true" [min]="1" [max]="7">
+      <b slot="start">1</b>
+      <b slot="end">7</b>
+    </ion-range>
+  </ion-item>
+
+  <!-- Level Description -->
+  <ion-item lines="none">
+    <ion-label color="primary"><b>Sleepiness Level Description</b></ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <b>{{ getSleepinessScaleValue() }}</b>
+  </ion-item>
+</ion-item-group>
+
+<ion-button expand="block" class="ion-padding" (click)="logDaySleepinessData()" ><b>Log Day Sleepiness</b></ion-button>

@@ -1,0 +1,24 @@
+<ion-button expand="block" class="ion-padding" (click)="loadDaySleepData()" ><b>Refresh</b></ion-button>
+
+<ng-container *ngIf="daySleepinessData.length > 0; else noData">
+  <ion-card *ngFor="let sleepinessData of daySleepinessData">
+    <ion-card-header>
+      <ion-card-title>{{sleepinessData.levelString()}}</ion-card-title>
+      <ion-card-subtitle color="primary"> {{ sleepinessData.loggedAtString() }} </ion-card-subtitle>
+      <ion-card-subtitle>Day Sleepiness</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ sleepinessData.summaryString() }}
+    </ion-card-content>
+
+    <!-- Delete Button -->
+    <ion-button fill="clear" color="danger" (click)="deleteDaySleepData(sleepinessData.getId())">Delete</ion-button>
+  </ion-card>
+</ng-container>
+
+<ng-template #noData>
+  <div class="center-message">
+    <h3><b>No Data Available</b></h3>
+  </div>
+</ng-template>

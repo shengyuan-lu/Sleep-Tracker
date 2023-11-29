@@ -1,0 +1,55 @@
+<ion-item *ngIf="errorMessage" class="ion-padding-vertical" color="danger" lines="none" (click)="clearMessages()">
+  <b>{{ errorMessage }}</b>
+</ion-item>
+
+<ion-item *ngIf="successMessage" class="ion-padding-vertical" color="success" lines="none" (click)="clearMessages()">
+  <b>{{ successMessage }}</b>
+</ion-item>
+
+<ion-item-group class="ion-padding-bottom">
+  <ion-item lines="none">
+    <ion-label color="primary"><b>Bedtime</b></ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <h4 slot="start">{{formatISOStringToDisplay(sleepStartISOString)}}</h4>
+    <ion-button slot="end" id="bedtime-selection-modal" (click)="clearMessages()">Edit</ion-button>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label color="primary"><b>Wake-up Time</b></ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <h4 slot="start">{{formatISOStringToDisplay(sleepEndISOString)}}</h4>
+    <ion-button slot="end" id="wakeup-selection-modal" (click)="clearMessages()">Edit</ion-button>
+  </ion-item>
+</ion-item-group>
+
+<ion-item lines="none">
+  <ion-label color="primary"><b>Sleep Duration</b></ion-label>
+  <ion-label slot="end"><b>{{calculateSleepDurationString()}}</b></ion-label>
+</ion-item>
+
+<ion-button expand="block" class="ion-padding" (click)="logOvernightSleepData()" ><b>Log Overnight Sleep</b></ion-button>
+
+<ion-modal trigger="bedtime-selection-modal" [cssClass]="'bottom-end'">
+  <ng-template>
+    <ion-datetime
+      presentation="date-time"
+      [(ngModel)]="sleepStartISOString"
+      size="cover"
+      [showDefaultButtons]="true"
+    ></ion-datetime>
+  </ng-template>
+</ion-modal>
+
+<ion-modal trigger="wakeup-selection-modal" [cssClass]="'bottom-end'">
+  <ng-template>
+    <ion-datetime
+      presentation="date-time"
+      [(ngModel)]="sleepEndISOString"
+      size="cover"
+      [showDefaultButtons]="true"
+    ></ion-datetime>
+  </ng-template>
+</ion-modal>
+
+

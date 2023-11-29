@@ -1,0 +1,24 @@
+<ion-button expand="block" class="ion-padding" (click)="loadOvernightSleepData()" ><b>Refresh</b></ion-button>
+
+<ng-container *ngIf="overnightSleepData.length > 0; else noData">
+  <ion-card *ngFor="let sleepData of overnightSleepData">
+    <ion-card-header>
+      <ion-card-title>{{ sleepData.summaryString() }}</ion-card-title>
+      <ion-card-subtitle color="primary">{{ sleepData.getNightOfString() }}</ion-card-subtitle>
+      <ion-card-subtitle>Overnight Sleep</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ sleepData.loggedAtString() }}
+    </ion-card-content>
+
+    <ion-button fill="clear" color="danger" (click)="deleteOvernightData(sleepData.getId())">Delete</ion-button>
+
+  </ion-card>
+</ng-container>
+
+<ng-template #noData>
+  <div class="center-message">
+    <h3><b>No Data Available</b></h3>
+  </div>
+</ng-template>
